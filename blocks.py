@@ -6,18 +6,21 @@ SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
 
 
-class Block():
+class Block:
     def __init__(self, pos, mass, speed, color):
-        self.pos = pos
+        self.pos = list(pos)
         self.mass = mass
         self.speed = speed
-        self.color = color
+        self.color = tuple(color)
+
+    def move(self):
+        self.pos[0] += self.speed
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.pos)
 
 
-class Main():
+class Main:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("PI calculator")
@@ -42,7 +45,8 @@ class Main():
                 sys.exit(0)
 
     def move(self):
-        pass  # Movement logic to be implemented
+        self.sb.move()
+        self.bb.move()
 
     def draw(self):
         self.screen.fill((0, 0, 0))
